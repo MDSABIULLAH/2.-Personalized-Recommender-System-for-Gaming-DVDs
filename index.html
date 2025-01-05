@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Game Recommender System</title>
+    <style>
+        body { font-family: Arial, sans-serif; line-height: 1.6; margin: 0; padding: 20px; }
+        h1 { color: #333; }
+        form { max-width: 400px; margin: 20px auto; }
+        label { display: block; margin-bottom: 5px; }
+        input[type="text"], input[type="password"], input[type="number"] { width: 100%; padding: 8px; margin-bottom: 10px; }
+        input[type="submit"] { background-color: #4CAF50; color: white; padding: 10px 15px; border: none; cursor: pointer; }
+        input[type="submit"]:hover { background-color: #45a049; }
+        .flash-messages { list-style-type: none; padding: 0; }
+        .flash-message { background-color: #f8d7da; border-color: #f5c6cb; color: #721c24; padding: 10px; border-radius: 4px; margin-bottom: 10px; }
+    </style>
+</head>
+<body>
+    <h1>Game Recommender System</h1>
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+    <ul class="flash-messages">
+        {% for message in messages %}
+        <li class="flash-message">{{ message }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+    {% endwith %}
+    <form method="post" action="{{ url_for('get_recommendations') }}">
+        <label for="db_user">Database User:</label>
+        <input type="text" id="db_user" name="db_user" required>
+        
+        <label for="db_password">Database Password:</label>
+        <input type="password" id="db_password" name="db_password" required>
+        
+        <label for="db_name">Database Name:</label>
+        <input type="text" id="db_name" name="db_name" required>
+        
+        <label for="user_id">User ID:</label>
+        <input type="number" id="user_id" name="user_id" required>
+        
+        <input type="submit" value="Get Recommendations">
+    </form>
+    <p>If you haven't uploaded data yet, please <a href="{{ url_for('upload_file') }}">upload a CSV file</a> first.</p>
+</body>
+</html>

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recommendations Result</title>
+    <style>
+        body { font-family: Arial, sans-serif; line-height: 1.6; margin: 0; padding: 20px; }
+        h1, h2 { color: #333; }
+        ul { list-style-type: none; padding: 0; }
+        li { margin-bottom: 10px; }
+        .message { background-color: #d4edda; border-color: #c3e6cb; color: #155724; padding: 10px; border-radius: 4px; margin-bottom: 20px; }
+    </style>
+</head>
+<body>
+    <h1>Recommendations Result</h1>
+    {% if message %}
+    <div class="message">{{ message }}</div>
+    {% endif %}
+    {% if recommendations %}
+    <h2>Top Recommendations for User {{ user_id }}:</h2>
+    <ul>
+    {% for game, rating in recommendations %}
+        <li><strong>{{ game }}</strong>: {{ rating|round(2) }}</li>
+    {% endfor %}
+    </ul>
+    {% endif %}
+    <a href="{{ url_for('index') }}">Back to Home</a>
+</body>
+</html>
+
